@@ -1,3 +1,5 @@
+# Use python 3.10.9
+
 # Core ML-Agents packages
 mlagents==1.1.0
 mlagents-envs==1.1.0
