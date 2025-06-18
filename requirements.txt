@@ -1,0 +1,4 @@
+mlagents==0.30.0
+torch>=1.13.1
+protobuf==3.20.3
+setuptools<81

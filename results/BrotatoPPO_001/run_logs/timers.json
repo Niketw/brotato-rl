@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1750275469",
+        "python_version": "3.10.9 (tags/v3.10.9:1dd9be6, Dec  6 2022, 20:01:21) [MSC v.1934 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\kanik\\Desktop\\Me\\projects\\brotato-rl-sammy\\mlagent\\Scripts\\mlagents-learn config.yaml --run-id=BrotatoPPO_001",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.7.1+cpu",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1750275498"
+    },
+    "total": 28.548121500003617,
+    "count": 1,
+    "self": 0.0044519000221043825,
+    "children": {
+        "run_training.setup": {
+            "total": 0.13735489995451644,
+            "count": 1,
+            "self": 0.13735489995451644
+        },
+        "TrainerController.start_learning": {
+            "total": 28.406314700026996,
+            "count": 1,
+            "self": 7.349997758865356e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 28.40623050002614,
+                    "count": 1,
+                    "self": 28.40623050002614
+                },
+                "TrainerController._save_models": {
+                    "total": 1.0700023267418146e-05,
+                    "count": 1,
+                    "self": 1.0700023267418146e-05
+                }
+            }
+        }
+    }
+}
