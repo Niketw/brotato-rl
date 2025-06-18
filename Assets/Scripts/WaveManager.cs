@@ -131,4 +131,14 @@ public class WaveManager : MonoBehaviour
         waveRunning = false;
         EnemyManager.Instance.DestroyAllEnemies();
     }
+
+    public int GetCurrentWave()
+    {
+        return currentWave;
+    }
+
+    public int GetCurrentWaveTime()
+    {
+        return currentWaveTime;
+    }
 }

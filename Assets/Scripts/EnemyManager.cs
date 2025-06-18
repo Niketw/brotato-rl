@@ -54,4 +54,22 @@ public class EnemyManager : MonoBehaviour
             Destroy(e.gameObject);
         }
     }
+
+    public Enemy GetNearestEnemy(Vector2 position)
+    {
+        Enemy nearest = null;
+        float minDistance = float.MaxValue;
+        
+        foreach (var enemy in FindObjectsOfType<Enemy>())
+        {
+            float distance = Vector2.Distance(position, enemy.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                nearest = enemy;
+            }
+        }
+        
+        return nearest;
+    }
 }
