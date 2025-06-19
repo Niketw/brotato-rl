@@ -29,17 +29,25 @@ public class BrotatoAgent : Agent
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        // Player position and health
+        // 8 observations:
+        // [0] Player pos x (float)
+        // [1] Player pos y (float)
+        // [2] Player health (float, normalized)
+        // [3] Wave number (float, normalized)
+        // [4] Wave time (float, normalized)
+        // [5] To enemy x (float)
+        // [6] To enemy y (float)
+        // [7] Distance to enemy (float)
+
         Vector2 position = transform.position;
         sensor.AddObservation(position.x);
         sensor.AddObservation(position.y);
         sensor.AddObservation(player.GetCurrentHealth() / 100f);  // Normalized health
 
-        // Wave information
-        sensor.AddObservation(waveManager.GetCurrentWave());
+        float maxWaves = 1f; // Should match MaxWaves in WaveManager
+        sensor.AddObservation(waveManager.GetCurrentWave() / maxWaves); // Normalized wave number
         sensor.AddObservation(waveManager.GetCurrentWaveTime() / 30f);  // Normalized wave time
 
-        // Enemy information
         var nearestEnemy = EnemyManager.Instance.GetNearestEnemy(transform.position);
         if (nearestEnemy != null)
         {

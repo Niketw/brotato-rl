@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 0.2f; // Ensure time scale is normal
         restartButton.onClick.AddListener(RestartGame);
         gameRunning = true;
     }
