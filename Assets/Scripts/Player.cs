@@ -13,8 +13,7 @@ public class Player : MonoBehaviour
     int maxHealth = 100;
     int currentHealth;
     bool dead = false;
-    
-    float moveHorizontal, moveVertical;
+      float moveHorizontal, moveVertical;
     Vector2 movement;
     
     int facingDirection = 1; // 1 = right, -1 = left
@@ -27,6 +26,16 @@ public class Player : MonoBehaviour
         
         currentHealth = maxHealth;
         healthText.text = maxHealth.ToString();
+    }
+    
+    public void SetMovement(Vector2 newMovement)
+    {
+        movement = newMovement.normalized;
+    }
+    
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
     private void Update()
