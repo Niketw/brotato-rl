@@ -13,4 +13,7 @@ public class BrotatoAgentConfig : ScriptableObject
 
     [Header("Other Settings")]
     public float episodeTimeout = 300f;        // Maximum episode length in seconds
+
+    [Header("Rewards")]
+    public float stepReward = 0.01f;          // Reward for each second survived
 }

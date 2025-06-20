@@ -60,7 +60,9 @@ public class EnemyManager : MonoBehaviour
         Enemy nearest = null;
         float minDistance = float.MaxValue;
         
-        foreach (var enemy in FindObjectsOfType<Enemy>())
+        // Use new API to find enemies without sorting for performance
+        var enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
+        foreach (var enemy in enemies)
         {
             float distance = Vector2.Distance(position, enemy.transform.position);
             if (distance < minDistance)

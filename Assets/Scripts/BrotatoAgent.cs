@@ -2,6 +2,7 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using Unity.MLAgents.Policies;
 
 public class BrotatoAgent : Agent
 {
@@ -13,14 +14,29 @@ public class BrotatoAgent : Agent
     private int lastHealth = 100;
     private float episodeTimer = 0f;
 
+    // Add automatic decision requests to ensure OnActionReceived is called every step
     public override void Initialize()
     {
         if (player == null) player = GetComponent<Player>();
         if (waveManager == null) waveManager = WaveManager.instance;
+
+        // Ensure the agent requests a decision each FixedUpdate
+        var dr = GetComponent<Unity.MLAgents.DecisionRequester>();
+        if (dr == null)
+            dr = gameObject.AddComponent<Unity.MLAgents.DecisionRequester>();
+        dr.DecisionPeriod = 1;
+
+        // NOTE: Configure your BehaviorParameters component in the Inspector:
+        // Set Action Type = Discrete, Branches = [9] for 8-direction movement + no-op
     }
 
     public override void OnEpisodeBegin()
     {
+        // Ensure the game is running when the episode starts
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.StartGame();
+        }
         // Reset episode variables
         lastWaveNumber = 0;
         lastHealth = 100;
@@ -66,14 +82,27 @@ public class BrotatoAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        if (!GameManager.instance.IsGameRunning()) return;
+        // Removed IsGameRunning guard so the agent always applies actions during training
 
-        // Process continuous actions for movement
-        float moveX = actions.ContinuousActions[0];
-        float moveY = actions.ContinuousActions[1];
+        // Map discrete action to 8-directional movement
+        int action = actions.DiscreteActions[0];
+        Vector2 move = Vector2.zero;
+        switch (action)
+        {
+            case 0: move = Vector2.up; break;
+            case 1: move = new Vector2(1, 1).normalized; break;
+            case 2: move = Vector2.right; break;
+            case 3: move = new Vector2(1, -1).normalized; break;
+            case 4: move = Vector2.down; break;
+            case 5: move = new Vector2(-1, -1).normalized; break;
+            case 6: move = Vector2.left; break;
+            case 7: move = new Vector2(-1, 1).normalized; break;
+            case 8: move = Vector2.zero; break;  // No-op action
+        }
+        player.SetMovement(move);
 
-        // Update player movement through Player component
-        player.SetMovement(new Vector2(moveX, moveY));
+        // Survival reward each step
+        AddReward(config.stepReward * Time.fixedDeltaTime);
 
         // Track time and potentially end episode
         episodeTimer += Time.fixedDeltaTime;
@@ -112,8 +141,21 @@ public class BrotatoAgent : Agent
 
     public override void Heuristic(in ActionBuffers actionsOut)
     {
-        var continuousActionsOut = actionsOut.ContinuousActions;
-        continuousActionsOut[0] = Input.GetAxis("Horizontal");
-        continuousActionsOut[1] = Input.GetAxis("Vertical");
+        var discreteOut = actionsOut.DiscreteActions;
+        int action = 8; // default to no-op
+        // Determine directional input (arrow keys or WASD)
+        bool up = Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W);
+        bool down = Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S);
+        bool left = Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+        bool right = Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+        if (up && right) action = 1;
+        else if (down && right) action = 3;
+        else if (down && left) action = 5;
+        else if (up && left) action = 7;
+        else if (up) action = 0;
+        else if (right) action = 2;
+        else if (down) action = 4;
+        else if (left) action = 6;
+        discreteOut[0] = action;
     }
 }

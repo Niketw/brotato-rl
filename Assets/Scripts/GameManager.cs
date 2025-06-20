@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Unity.MLAgents.Policies; // for BehaviorType
 
 public class GameManager : MonoBehaviour
 {
@@ -40,13 +41,33 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         gameRunning = false;
-        WaveManager.instance.StopWaves(); // Add this line to stop waves and clear enemies
-        gameOverPanel.SetActive(true);
+        WaveManager.instance.StopWaves();
+
+        // Auto-restart only during agent training; otherwise show Game Over UI
+        var agentBP = Object.FindFirstObjectByType<BrotatoAgent>()?.GetComponent<BehaviorParameters>();
+        if (agentBP != null && agentBP.BehaviorType != BehaviorType.HeuristicOnly)
+        {
+            RestartGame();
+        }
+        else
+        {
+            if (gameOverPanel != null)
+                gameOverPanel.SetActive(true);
+        }
     }
 
     public void CompleteGame() // Add this method
     {
         gameCompleted = true;
         gameRunning = false;
+    }
+
+    public void StartGame()
+    {
+        // Resume game state after GameOver or episode reset
+        gameCompleted = false;
+        gameRunning = true;
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
     }
 }
