@@ -8,7 +8,7 @@ torchvision==0.17.2+cu121
 torchaudio==2.2.2
 
 # Pin NumPy to 1.x for compatibility
-numpy==1.26.4
+numpy==1.23.5
 
 # Supporting libraries (your existing ones, updated or pinned as needed)
 absl-py==2.3.0

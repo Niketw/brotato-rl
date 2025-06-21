@@ -3,12 +3,14 @@ using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
 using Unity.MLAgents.Policies;
+using System.Collections.Generic;
 
 public class BrotatoAgent : Agent
 {
     [SerializeField] private BrotatoAgentConfig config;
     [SerializeField] private Player player;
     [SerializeField] private WaveManager waveManager;
+    [SerializeField] private float maxEnemyDistance = 20f;  // finite max distance for padding and clamping
 
     private int lastWaveNumber = 0;
     private int lastHealth = 100;
@@ -64,19 +66,38 @@ public class BrotatoAgent : Agent
         sensor.AddObservation(waveManager.GetCurrentWave() / maxWaves); // Normalized wave number
         sensor.AddObservation(waveManager.GetCurrentWaveTime() / 30f);  // Normalized wave time
 
-        var nearestEnemy = EnemyManager.Instance.GetNearestEnemy(transform.position);
-        if (nearestEnemy != null)
+        // Use GetAllEnemies to find top 15 closest enemies and add observations
+        Enemy[] allEnemies = EnemyManager.Instance.GetAllEnemies();
+        // Sort enemies by distance
+        var enemyList = new List<(Enemy enemy, float distance)>();
+        foreach (var e in allEnemies)
         {
-            Vector2 toEnemy = (nearestEnemy.transform.position - transform.position).normalized;
-            sensor.AddObservation(toEnemy.x);
-            sensor.AddObservation(toEnemy.y);
-            sensor.AddObservation(Vector2.Distance(transform.position, nearestEnemy.transform.position));
+            float d = Vector2.Distance(transform.position, e.transform.position);
+            enemyList.Add((e, d));
         }
-        else
+        enemyList.Sort((a, b) => a.distance.CompareTo(b.distance));
+        int maxEnemies = 30;
+        float infiniteDist = maxEnemyDistance;  // use finite max distance to avoid Infinity
+        for (int i = 0; i < maxEnemies; i++)
         {
-            sensor.AddObservation(0f);
-            sensor.AddObservation(0f);
-            sensor.AddObservation(100f);  // Large distance when no enemies
+            if (i < enemyList.Count)
+            {
+                var enemyPair = enemyList[i];
+                Enemy enemy = enemyPair.enemy;
+                // Observe absolute position and distance
+                Vector3 ePos = enemy.transform.position;
+                float dist = enemyPair.distance;
+                sensor.AddObservation(ePos.x);
+                sensor.AddObservation(ePos.y);
+                sensor.AddObservation(dist);
+            }
+            else
+            {
+                // No enemy: pad with zeros
+                sensor.AddObservation(0f);
+                sensor.AddObservation(0f);
+                sensor.AddObservation(maxEnemyDistance); // Use maxEnemyDistance instead of infinity
+            }
         }
     }
 

@@ -1,0 +1,47 @@
+{
+    "BrotatoAgent": {
+        "checkpoints": [
+            {
+                "steps": 41490,
+                "file_path": "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-41490.onnx",
+                "reward": 0.3854604833992198,
+                "creation_time": 1750516289.5911868,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-41490.pt"
+                ]
+            },
+            {
+                "steps": 425978,
+                "file_path": "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-425978.onnx",
+                "reward": 0.4739004522562027,
+                "creation_time": 1750529929.6670232,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-425978.pt"
+                ]
+            },
+            {
+                "steps": 441293,
+                "file_path": "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-441293.onnx",
+                "reward": 0.442160427570343,
+                "creation_time": 1750530295.904904,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-441293.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 441293,
+            "file_path": "results\\BrotatoPPO_001\\BrotatoAgent.onnx",
+            "reward": 0.442160427570343,
+            "creation_time": 1750530295.904904,
+            "auxillary_file_paths": [
+                "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-441293.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.5.1+cu121"
+    }
+}

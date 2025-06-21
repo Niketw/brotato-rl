@@ -563,6 +563,7 @@ MonoBehaviour:
   config: {fileID: 11400000, guid: 713685131dfe229459ded427a7f3e569, type: 2}
   player: {fileID: 483095792}
   waveManager: {fileID: 1389444050}
+  maxEnemyDistance: 20
 --- !u!114 &483095796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -576,7 +577,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 8
+    VectorObservationSize: 95
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -619,16 +620,16 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 515163973}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 554889254}
+  m_Father: {fileID: 637582831}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 343.08, y: -81.749}
+  m_AnchoredPosition: {x: -93.61008, y: -40.577034}
   m_SizeDelta: {x: 187.22, y: 50.4232}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &515163975
@@ -978,7 +979,6 @@ RectTransform:
   m_Children:
   - {fileID: 802693506}
   - {fileID: 1458684863}
-  - {fileID: 515163974}
   - {fileID: 637582831}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1275,7 +1275,7 @@ Transform:
   m_GameObject: {fileID: 627193462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.05, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1494,7 +1494,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 515163974}
   m_Father: {fileID: 554889254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
@@ -2053,6 +2054,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 2604496463661789171, guid: 1bb0aa047ab8d4f49915a8b818698427, type: 3}
   timeBetweenSpawns: 0.5
+  spawnRadius: 4
 --- !u!1 &1302994737
 GameObject:
   m_ObjectHideFlags: 0
