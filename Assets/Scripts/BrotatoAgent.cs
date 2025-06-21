@@ -11,6 +11,7 @@ public class BrotatoAgent : Agent
     [SerializeField] private Player player;
     [SerializeField] private WaveManager waveManager;
     [SerializeField] private float maxEnemyDistance = 20f;  // finite max distance for padding and clamping
+    private float timeInCorner = 0f;
 
     private int lastWaveNumber = 0;
     private int lastHealth = 100;
@@ -124,6 +125,54 @@ public class BrotatoAgent : Agent
 
         // Survival reward each step
         AddReward(config.stepReward * Time.fixedDeltaTime);
+        // Compute radial and tangential movement rewards relative to enemies
+        var allEnemies = EnemyManager.Instance.GetAllEnemies();
+        Vector3 threatVector = Vector3.zero;
+        const float ε = 0.001f;
+        foreach (var e in allEnemies)
+        {
+            Vector3 delta = e.transform.position - transform.position;
+            float dist = delta.magnitude;
+            if (dist <= 0f) continue;
+            float weight = 1f / (dist + ε);
+            threatVector += delta.normalized * weight;
+        }
+        if (threatVector != Vector3.zero)
+        {
+            // capture raw strength before normalization
+            float netEnemyStrength = threatVector.magnitude;
+            // direction toward the “center” of nearby enemies
+            Vector3 r = threatVector.normalized;
+            Vector3 t = new Vector3(-r.y, r.x, 0f);
+            var rb = player.GetComponent<Rigidbody2D>();
+            Vector2 v = rb != null ? rb.linearVelocity : Vector2.zero;
+            float vR = Vector3.Dot(v, r);
+            float vT = Vector3.Dot(v, t);
+            if (netEnemyStrength > config.enemyVectorThreshold)
+                AddReward(config.tangentialRewardScale * Mathf.Abs(vT) * Time.fixedDeltaTime);
+            AddReward(-config.radialPenaltyScale * Mathf.Max(0f, vR) * Time.fixedDeltaTime);
+        }
+
+        // Corner region penalty after grace period
+        Vector2 pos2D = transform.position;
+        // Determine if in any 5x5 corner box given a 40x25 world with center at (0,0)
+        float halfW = config.worldWidth * 0.5f;
+        float halfH = config.worldHeight * 0.5f;
+        bool inCorner = Mathf.Abs(pos2D.x) > (halfW - config.cornerBoxWidth)
+                        && Mathf.Abs(pos2D.y) > (halfH - config.cornerBoxHeight);
+        if (inCorner)
+        {
+            timeInCorner += Time.deltaTime;
+        }
+        else
+        {
+            timeInCorner = 0f;
+        }
+        if (timeInCorner > config.cornerGracePeriod)
+        {
+            float excess = timeInCorner - config.cornerGracePeriod;
+            AddReward(-config.cornerPenalty * excess * Time.deltaTime);
+        }
 
         // Track time and potentially end episode
         episodeTimer += Time.fixedDeltaTime;

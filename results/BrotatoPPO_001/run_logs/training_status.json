@@ -27,21 +27,30 @@
                 "auxillary_file_paths": [
                     "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-441293.pt"
                 ]
+            },
+            {
+                "steps": 446383,
+                "file_path": "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-446383.onnx",
+                "reward": 26.40537326534589,
+                "creation_time": 1750531924.307053,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-446383.pt"
+                ]
             }
         ],
         "final_checkpoint": {
-            "steps": 441293,
+            "steps": 446383,
             "file_path": "results\\BrotatoPPO_001\\BrotatoAgent.onnx",
-            "reward": 0.442160427570343,
-            "creation_time": 1750530295.904904,
+            "reward": 26.40537326534589,
+            "creation_time": 1750531924.307053,
             "auxillary_file_paths": [
-                "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-441293.pt"
+                "results\\BrotatoPPO_001\\BrotatoAgent\\BrotatoAgent-446383.pt"
             ]
         }
     },
     "metadata": {
         "stats_format_version": "0.3.0",
         "mlagents_version": "1.1.0",
-        "torch_version": "2.5.1+cu121"
+        "torch_version": "2.2.2+cu121"
     }
 }

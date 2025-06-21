@@ -1,0 +1,65 @@
+{
+    "BrotatoAgent": {
+        "checkpoints": [
+            {
+                "steps": 469971,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-469971.onnx",
+                "reward": 42.191244065761566,
+                "creation_time": 1750542262.5735824,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-469971.pt"
+                ]
+            },
+            {
+                "steps": 499807,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-499807.onnx",
+                "reward": 47.67494119480252,
+                "creation_time": 1750542499.0273845,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-499807.pt"
+                ]
+            },
+            {
+                "steps": 616108,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-616108.onnx",
+                "reward": null,
+                "creation_time": 1750543245.7825332,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-616108.pt"
+                ]
+            },
+            {
+                "steps": 999682,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-999682.onnx",
+                "reward": 113.09268610179424,
+                "creation_time": 1750545670.9376123,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-999682.pt"
+                ]
+            },
+            {
+                "steps": 1034110,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.onnx",
+                "reward": 111.04472517967224,
+                "creation_time": 1750545882.2079902,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 1034110,
+            "file_path": "results\\BrotatoPPO_002\\BrotatoAgent.onnx",
+            "reward": 111.04472517967224,
+            "creation_time": 1750545882.2079902,
+            "auxillary_file_paths": [
+                "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
