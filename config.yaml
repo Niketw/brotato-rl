@@ -1,0 +1,28 @@
+behaviors:
+  BrotatoAgent:
+    trainer_type: ppo
+    hyperparameters:
+      batch_size: 2048                # larger for more stable gradients
+      buffer_size: 20480              # ditto
+      learning_rate: 0.0002           # a bit lower to slow down premature convergence
+      beta: 0.01                      # higher entropy bonus to encourage exploration
+      epsilon: 0.15                   # tighter clipping can stabilize updates
+      lambd: 0.98                     # higher GAE λ for lower bias in advantage estimates
+      num_epoch: 5                    # more passes over data per update
+      learning_rate_schedule: linear
+    network_settings:
+      normalize: true                 # normalize observations for better learning
+      hidden_units: 128
+      num_layers: 2
+    reward_signals:
+      extrinsic:
+        gamma: 0.995                  # more long‑term focus
+        strength: 1.0
+      curiosity:                       # intrinsic motivation to explore
+        gamma: 0.99
+        strength: 0.05
+    max_steps: 1.0e7                  # allow more training time
+    time_horizon: 500                 # shorter horizons give fresher advantage estimates
+    summary_freq: 5000                # more frequent logging to track unstable learning
+
+

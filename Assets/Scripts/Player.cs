@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using Unity.MLAgents.Policies;
 
 public class Player : MonoBehaviour
 {
@@ -13,8 +14,7 @@ public class Player : MonoBehaviour
     int maxHealth = 100;
     int currentHealth;
     bool dead = false;
-    
-    float moveHorizontal, moveVertical;
+      float moveHorizontal, moveVertical;
     Vector2 movement;
     
     int facingDirection = 1; // 1 = right, -1 = left
@@ -28,6 +28,16 @@ public class Player : MonoBehaviour
         currentHealth = maxHealth;
         healthText.text = maxHealth.ToString();
     }
+    
+    public void SetMovement(Vector2 newMovement)
+    {
+        movement = newMovement.normalized;
+    }
+    
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
+    }
 
     private void Update()
     {
@@ -37,19 +47,24 @@ public class Player : MonoBehaviour
             anim.SetFloat("velocity", 0);
             return;
         }
-        
-        moveHorizontal = Input.GetAxis("Horizontal");
-        moveVertical = Input.GetAxis("Vertical");
-        
-        movement = new Vector2(moveHorizontal, moveVertical).normalized;
-        
+
+        // Only read player Input when in Heuristic mode or no Agent present
+        var bp = GetComponent<BehaviorParameters>();
+        // Only fallback to manual input if BehaviorType is HeuristicOnly
+        if (bp != null && bp.BehaviorType == BehaviorType.HeuristicOnly)
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
+            movement = new Vector2(moveHorizontal, moveVertical).normalized;
+        }
+        // Otherwise keep movement set by Agent.SetMovement()
+
         anim.SetFloat("velocity", movement.magnitude);
 
         if (movement.x != 0)
         {
             facingDirection = movement.x > 0 ? 1 : -1;
         }
-        
         transform.localScale = new Vector2(facingDirection, 1);
     }
 
