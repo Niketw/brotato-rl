@@ -24,7 +24,7 @@ public class EnemyManager : MonoBehaviour
     {
         enemysParent = GameObject.Find("Enemies").transform;
         // Cache player transform
-        var player = FindAnyObjectByType<Player>();
+        var player = FindObjectOfType<Player>();
         if (player != null) playerTransform = player.transform;
     }
 

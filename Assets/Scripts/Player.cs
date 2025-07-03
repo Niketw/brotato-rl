@@ -6,7 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI healthText;
     [SerializeField] float moveSpeed = 6;
-    
+    [SerializeField] int damageTick = 5; // Damage taken per hit
+
     Animator anim;
     Rigidbody2D rb;
     SpriteRenderer spriteRenderer;
@@ -84,7 +85,7 @@ public class Player : MonoBehaviour
 
         if (enemy != null)
         {
-            Hit(20);
+            Hit(damageTick);
         }
     }
 

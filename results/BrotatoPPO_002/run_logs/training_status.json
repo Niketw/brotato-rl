@@ -2,58 +2,58 @@
     "BrotatoAgent": {
         "checkpoints": [
             {
-                "steps": 469971,
-                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-469971.onnx",
-                "reward": 42.191244065761566,
-                "creation_time": 1750542262.5735824,
+                "steps": 2528871,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-2528871.onnx",
+                "reward": 23.978919712205727,
+                "creation_time": 1750606730.2741542,
                 "auxillary_file_paths": [
-                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-469971.pt"
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-2528871.pt"
                 ]
             },
             {
-                "steps": 499807,
-                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-499807.onnx",
-                "reward": 47.67494119480252,
-                "creation_time": 1750542499.0273845,
-                "auxillary_file_paths": [
-                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-499807.pt"
-                ]
-            },
-            {
-                "steps": 616108,
-                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-616108.onnx",
+                "steps": 5101288,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5101288.onnx",
                 "reward": null,
-                "creation_time": 1750543245.7825332,
+                "creation_time": 1750622405.0511587,
                 "auxillary_file_paths": [
-                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-616108.pt"
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5101288.pt"
                 ]
             },
             {
-                "steps": 999682,
-                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-999682.onnx",
-                "reward": 113.09268610179424,
-                "creation_time": 1750545670.9376123,
+                "steps": 5166724,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5166724.onnx",
+                "reward": null,
+                "creation_time": 1750623161.8555677,
                 "auxillary_file_paths": [
-                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-999682.pt"
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5166724.pt"
                 ]
             },
             {
-                "steps": 1034110,
-                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.onnx",
-                "reward": 111.04472517967224,
-                "creation_time": 1750545882.2079902,
+                "steps": 5175724,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5175724.onnx",
+                "reward": null,
+                "creation_time": 1750663277.4063938,
                 "auxillary_file_paths": [
-                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.pt"
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5175724.pt"
+                ]
+            },
+            {
+                "steps": 5206826,
+                "file_path": "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5206826.onnx",
+                "reward": null,
+                "creation_time": 1750663826.7844684,
+                "auxillary_file_paths": [
+                    "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5206826.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 1034110,
+            "steps": 5206826,
             "file_path": "results\\BrotatoPPO_002\\BrotatoAgent.onnx",
-            "reward": 111.04472517967224,
-            "creation_time": 1750545882.2079902,
+            "reward": null,
+            "creation_time": 1750663826.7844684,
             "auxillary_file_paths": [
-                "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-1034110.pt"
+                "results\\BrotatoPPO_002\\BrotatoAgent\\BrotatoAgent-5206826.pt"
             ]
         }
     },
