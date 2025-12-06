@@ -101,4 +101,5 @@ This project is licensed under the MIT License. See `LICENSE` for details.
 ## ✨ Credits
 
 - Inspired by **Brotato** by Blobfish  
-- Built with Unity, ML-Agents, and Python  
+- Built with Unity, ML-Agents, and Python
+ 
